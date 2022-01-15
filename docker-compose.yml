@@ -1,0 +1,21 @@
+version: '3'
+services:
+  fluentd:
+    build: ./fluentd
+    ports:
+      - 24225:24224/tcp
+      - 24225:24224/udp
+    volumes:
+      - ./fluentd/log:/var/log:rw
+  app:
+    # https://hub.docker.com/r/toricls/everlasting-hey-yo
+    image: public.ecr.aws/toricls/everlasting-hey-yo
+    environment:
+      - GIVE_ME_PATTERN=1
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: localhost:24225
+        tag: docker.app
+    depends_on:
+      - fluentd
