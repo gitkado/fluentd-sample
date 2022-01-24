@@ -1,0 +1,13 @@
+version: '3'
+services:
+  vector:
+    build: ./vector
+    volumes:
+      - ./vector/log:/var/log:rw
+  app:
+    # https://hub.docker.com/r/toricls/everlasting-hey-yo
+    image: public.ecr.aws/toricls/everlasting-hey-yo
+    environment:
+      - GIVE_ME_PATTERN=1
+    depends_on:
+      - vector

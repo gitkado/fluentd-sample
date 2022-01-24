@@ -1,6 +1,11 @@
 # https://vector.dev/docs/reference/configuration/sources/docker_logs/#examples-dummy-logs
-[sources.my_source_id]
+[sources.app_source]
 type = "docker_logs"
 include_images = [ "public.ecr.aws/toricls/everlasting-hey-yo" ]
 
 # https://vector.dev/docs/reference/configuration/sinks/file/
+[sinks.app_sink]
+type = "file"
+inputs = [ "app_source" ]
+compression = "none"
+path = "/var/log/vector-%Y-%m-%d.log"
