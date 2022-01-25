@@ -52,6 +52,11 @@ fluentd_1  | 2022-01-24 15:45:26.963685924 +0000 app.tail: {"record":"Hey, Yo!",
 - 例えばアプリのログで`timestamp`を出力している場合に
   - `renew_time_key ${record.dig("timestamp")}`のように指定したらアプリのログをfluentdの`time`に設定できる
 
+## match.forward
+
+- 別のFluentdサーバにログを横流ししたりできる
+  - `@type record_transformer`を指定している場合、設定値によってはforwardでエラーが発生する
+
 ---
 
 - https://docs.fluentd.org/filter/grep

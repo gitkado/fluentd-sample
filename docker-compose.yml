@@ -19,3 +19,9 @@ services:
         tag: docker.app
     depends_on:
       - fluentd
+      - other_fluentd
+  other_fluentd:
+    image: fluent/fluentd:v1.7.0-debian-1.0
+    ports:
+      - 24226:24224/tcp
+      - 24226:24224/udp
